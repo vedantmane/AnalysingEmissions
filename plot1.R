@@ -1,0 +1,6 @@
+NEI <- readRDS("../DataAnalysis/summarySCC_PM25.rds")
+SCC <- readRDS("../DataAnalysis/Source_Classification_Code.rds")
+data <- tapply(NEI$Emissions, NEI$year, sum)
+par(mfrow = c(1,1) mar = c(4,4,2,1))
+plot(NEI$year, NEI$Emissions, xlab = "Year", ylab = "PM2.5 Emissions", xlim = c(1998,2008), type = "n", main = "Total PM2.5 emissions accross the years")
+points(rep(1999, times = nrow(dataSet[[1]])), dataSet[[1]]$Emissions, pch = 19, col = "red")
