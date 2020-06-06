@@ -1,0 +1,11 @@
+NEI <- readRDS("../DataAnalysis/summarySCC_PM25.rds")
+SCC <- readRDS("../DataAnalysis/Source_Classification_Code.rds")
+coalComb <- grepl("coal", SCC$Short.Name, ignore.case = TRUE)
+subSCC <- SCC[coalComb,]
+data <- merge(NEI , subSCC, by = "SCC")
+dim(data)
+data <- tapply(data$Emissions, data$year, sum)
+plot(names(data), data, xlab = "Year", ylab = "PM2.5 Emissions", xlim = c(1998,2008), type = "p",main = "Total PM2.5 emissions from Coal Combustion-related Sources", pch = 19, col = "orangered")
+lines(names(data), data, lty = 1, lwd = 2, col = "red")
+dev.copy(png, filename = "plot4.png")
+dev.off()
