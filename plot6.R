@@ -1,0 +1,13 @@
+NEI <- readRDS("../DataAnalysis/summarySCC_PM25.rds")
+SCC <- readRDS("../DataAnalysis/Source_Classification_Code.rds")
+data <- subset(NEI, NEI$fips == "24510" | NEI$fips == "06037")
+vehicle <- grepl("vehicle", SCC$SCC.Level.Two, ignore.case = TRUE)
+subSCC <- SCC[vehicle,]
+data <- merge(data , subSCC, by = "SCC")
+data <- aggregate(Emissions ~ fips + year, data = data, sum)
+library(ggplot2)
+dataPlot <- ggplot(data, aes(year,Emissions, color = fips))
+dataPlot <- dataPlot + geom_line() + xlab("YEAR") + ylab("PM2.5 Emissions") + ggtitle("Total PM2.5 emissions from Motor Vehicle Sources")
+print(dataPlot)
+dev.copy(png, filename = "plot6.png")
+dev.off()
