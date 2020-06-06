@@ -1,6 +1,6 @@
 NEI <- readRDS("../DataAnalysis/summarySCC_PM25.rds")
 SCC <- readRDS("../DataAnalysis/Source_Classification_Code.rds")
-data <- subset(NEI, NEI$fips == "24510" & (NEI$year == 1999 | NEI$year == 2008))
+data <- subset(NEI, NEI$fips == "24510")
 data <- tapply(data$Emissions, data$year, sum)
 par(mfrow = c(1,1), mar = c(4,4,2,1))
 plot(names(data), data, xlab = "Year", ylab = "PM2.5 Emissions", xlim = c(1998,2008), ylim = c(1500, 3500), type = "p",main = "Total PM2.5 emissions in Baltimore City", pch = 19, col = "orangered")
