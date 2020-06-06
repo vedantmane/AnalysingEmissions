@@ -7,7 +7,7 @@ subSCC <- SCC[vehicle,]
 data <- merge(data , subSCC, by = "SCC")
 data <- aggregate(Emissions ~ fips + year, data = data, sum)
 dataPlot <- ggplot(data, aes(year,Emissions, color = fips))
-dataPlot <- dataPlot + geom_line() + xlab("YEAR") + ylab("PM2.5 Emissions") + ggtitle("Total PM2.5 emissions from Motor Vehicle Sources")
+dataPlot <- dataPlot + geom_line() + xlab("YEAR") + ylab("PM2.5 Emissions") + ggtitle("Comparing PM2.5 emissions from Motor Vehicle Sources")
 print(dataPlot)
 dev.copy(png, filename = "plot6.png")
 dev.off()
